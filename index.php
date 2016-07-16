@@ -3,9 +3,6 @@
   require('messages.php');
 
   $show_donate = strlen($DONATE_URL.$PAYPAL_BUTTON_ID) > 0;
-  if ($PAYPAL_BUTTON_ID) {
-    # code...
-  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
