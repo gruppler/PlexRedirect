@@ -94,6 +94,12 @@ a:after {
 	color: white;
 }
 
+.navbar {
+    min-height: 0;
+    margin-bottom: 0;
+    border: 0 none;
+}
+
 /* Helpers */
 
 .mt {

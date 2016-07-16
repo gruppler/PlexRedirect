@@ -3,6 +3,27 @@
   require('messages.php');
 
   $show_donate = strlen($DONATE_URL.$PAYPAL_BUTTON_ID) > 0;
+
+  if (strlen($PLEXPY_API)) {
+    $libraries = file_get_contents("http://$PLEXPY_URL/api/v2?apikey=$PLEXPY_API&cmd=get_libraries");
+    if ($libraries && $libraries = json_decode($libraries)) {
+      $libraries = $libraries->response->data;
+      if (count($libraries)) {
+        $MOVIE_LIBS = explode(',', $MOVIE_LIBS);
+        $TV_LIBS = explode(',', $TV_LIBS);
+        $MOVIE_COUNT = 0;
+        $TV_COUNT = 0;
+
+        foreach ($libraries as $lib) {
+          if (in_array($lib->section_name, $MOVIE_LIBS)) {
+            $MOVIE_COUNT += 1*$lib->count;
+          } elseif (in_array($lib->section_name, $TV_LIBS)) {
+            $TV_COUNT += 1*$lib->count;
+          }
+        }
+      }
+    }
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,7 +98,7 @@
 
 
   <title>
-    <?=$SERVER_NAME?>
+    <?=ucfirst($SERVER_NAME)?>
   </title>
 
 
@@ -100,9 +121,7 @@
   <div class="navbar navbar-default navbar-fixed-top">
     <?=$message_html?>
     <div class="container">
-      <div class="navbar-header">
-        <a href="//<?=$PLEX_URL?>" <a class="navbar-brand" href="#"><b><?=$SERVER_NAME?></b></a>
-      </div>
+      <div class="navbar-header"></div>
     </div>
   </div>
   <div class="container" id="link-bar">
@@ -116,7 +135,7 @@
         <a href="//<?=$PLEX_URL?>">
           <img src="assets/img/s01.png" width="180" alt="">
           <h4>Access <?=$SERVER_NAME?></h4>
-          <p>Access over <strong><?=$MOVIE_COUNT?></strong> Movies and <strong><?=$TV_COUNT?></strong> TV Shows, all available for instant streaming!<p>
+          <p>Access <strong><?=$MOVIE_COUNT?></strong> Movies and <strong><?=$TV_COUNT?></strong> TV Shows, all available for instant streaming!<p>
         </a>
       </div>
       <!--/col-lg-4 -->
