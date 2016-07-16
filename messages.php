@@ -24,6 +24,8 @@ if (count($messages)) {
     );
   }
   $message_html = '<div class="messages">'.implode('', $message_html).'</div>';
+} else {
+  $message_html = '';
 }
 
 ?>
