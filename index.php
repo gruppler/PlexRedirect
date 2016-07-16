@@ -112,8 +112,7 @@
         <a href="//<?=$PLEX_URL?>" target="_top">
           <img src="assets/img/s01.png" width="180" alt="">
           <h4>Access <?=$SERVER_NAME?></h4>
-          <p>Access the
-            <?=$SERVER_NAME?> library with over <strong><?=$MOVIE_COUNT?></strong> Movies and <strong><?=$TV_COUNT?></strong> TV Shows available instantly.<p>
+          <p>Access over <strong><?=$MOVIE_COUNT?></strong> Movies and <strong><?=$TV_COUNT?></strong> TV Shows, all available for instant streaming!<p>
         </a>
       </div>
       <!--/col-lg-4 -->
@@ -133,7 +132,7 @@
           <a href="<?=$DONATE_URL?>" target="_top">
             <img src="assets/img/donate.svg" width="180" alt="">
             <h4>Donate</h4>
-            <p>Say thanks and help cover the monthly costs of keeping <?=$SERVER_NAME?> running</p>
+            <p>Say thanks and help cover the monthly costs of keeping <?=$SERVER_NAME?> running!</p>
           </a>
         </div>
         <!--/col-lg-4 -->
