@@ -3,11 +3,18 @@
 $messages = array(
   /*
   array(
-    'type' => 'error|warning|info|success'
+    'type' => 'error|warning|info|success',
     'date' => '1/1/1234',
     'text' => 'Hello, world'
   )
   */
+
+
+  array(
+    'type' => 'info',
+    'date' => '7/16/2016',
+    'text' => 'Testing, 123'
+  )
 );
 
 

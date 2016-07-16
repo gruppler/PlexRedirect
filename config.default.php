@@ -7,7 +7,7 @@ $SERVER_NAME = $_SERVER['SERVER_NAME'];
 $SERVER_URL = $_SERVER['SERVER_NAME'];
 
 // The URL to ping
-$PLEX_SERVER = $SERVER_URL.':32400';
+$PLEX_SERVER = $SERVER_URL.':32400/web';
 
 // PlexRequests URL
 $PLEX_REQUESTS = $SERVER_URL.':3000/search';
@@ -17,6 +17,6 @@ $PLEX_EMAIL = '';
 
 // Plex App URL
 // $PLEX_URL = 'app.plex.tv/web/app';
-$PLEX_URL = $PLEX_SERVER.'/web';
+$PLEX_URL = $PLEX_SERVER;
 
 ?>
