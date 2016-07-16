@@ -12,7 +12,7 @@ $PLEX_SERVER = $SERVER_URL.':32400';
 // PlexRequests URL
 $PLEX_REQUESTS = $SERVER_URL.':3000/search';
 
-// PlexEmail URL
+// PlexEmail URL (leave blank to hide)
 $PLEX_EMAIL = '';
 
 // Plex App URL
