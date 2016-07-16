@@ -6,6 +6,8 @@
 
   if (strlen($PLEXPY_API)) {
     $libraries = file_get_contents("http://$PLEXPY_URL/api/v2?apikey=$PLEXPY_API&cmd=get_libraries");
+    $activity = file_get_contents("http://$PLEXPY_URL/api/v2?apikey=$PLEXPY_API&cmd=get_activity");
+
     if ($libraries && $libraries = json_decode($libraries)) {
       $libraries = $libraries->response->data;
       if (count($libraries)) {
@@ -29,6 +31,10 @@
           $TV_COUNT = $tmp_tv_count;
         }
       }
+    }
+
+    if ($activity && $activity = json_decode($activity)) {
+      $STREAM_COUNT = $activity->response->data->stream_count;
     }
   }
 ?>
@@ -82,23 +88,43 @@
       return this;
     };
 
+    function serverUp(stream_count) {
+      serverImg.src = "assets/img/ipad-hand-on.png";
+      body.addClass('online').removeClass("offline");
+
+      if (stream_count == null) {
+        serverMsg.innerHTML = 'Ready for streaming';
+      } else {
+        serverMsg.innerHTML = 'Currently streaming to <strong>'+
+        stream_count + '</strong> user' + (stream_count == 1 ? '' : 's');
+      }
+    }
+
+    function serverDown() {
+      serverMsg.innerHTML = 'Down and unreachable';
+      serverImg.src = "assets/img/ipad-hand-off.png";
+    }
+
     function checkServer() {
       var p = new Ping();
       var server = "<?=$PLEX_SERVER?>";
       var timeout = 2000; //Milliseconds
       var body = document.getElementsByTagName("body")[0];
-      p.ping(server, function(data) {
-        var serverMsg = document.getElementById("server-status-msg");
-        var serverImg = document.getElementById("server-status-img");
-        if (data < 1000) {
-          serverMsg.innerHTML = 'Ready for streaming';
-          serverImg.src = "assets/img/ipad-hand-on.png";
-          body.addClass('online').removeClass("offline");
-        } else {
-          serverMsg.innerHTML = 'Down and unreachable';
-          serverImg.src = "assets/img/ipad-hand-off.png";
-        }
-      }, timeout);
+      var stream_count = <?=isset($STREAM_COUNT)?$STREAM_COUNT:'null'?>;
+
+      if (stream_count == null) {
+        p.ping(server, function(data) {
+          var serverMsg = document.getElementById("server-status-msg");
+          var serverImg = document.getElementById("server-status-img");
+          if (data < 1000) {
+            serverUp(stream_count);
+          } else {
+            serverDown();
+          }
+        }, timeout);
+      } else {
+        serverUp(stream_count);
+      }
     }
 
   </script>
