@@ -1,0 +1,11 @@
+<?php
+
+$SERVER_NAME = $_SERVER['SERVER_NAME'];
+$SERVER_URL = $_SERVER['SERVER_NAME'];
+$PLEX_SERVER = $SERVER_URL.':32400';
+$PLEX_REQUESTS = $SERVER_URL.':3000';
+$PLEX_EMAIL = '';
+
+$PLEX_URL = 'app.plex.tv/web/app';
+
+?>
