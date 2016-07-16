@@ -59,7 +59,7 @@
         var serverMsg = document.getElementById("server-status-msg");
         var serverImg = document.getElementById("server-status-img");
         if (data < 1000) {
-          serverMsg.innerHTML = 'Up and reachable';
+          serverMsg.innerHTML = 'Ready for streaming';
           serverImg.src = "assets/img/ipad-hand-on.png";
           body.addClass('online').removeClass("offline");
         } else {
@@ -108,34 +108,32 @@
     <!-- /row -->
 
     <div class="row mt centered">
-      <div class="col-lg-<?=strlen($PLEX_EMAIL) > 0 ? 4 : 6?>">
+      <div class="col-lg-<?=strlen($DONATE_URL) > 0 ? 4 : 6?>">
         <a href="//<?=$PLEX_URL?>" target="_top">
           <img src="assets/img/s01.png" width="180" alt="">
           <h4>Access <?=$SERVER_NAME?></h4>
           <p>Access the
-            <?=$SERVER_NAME?> library with over X Movies &amp; X TV Shows available instantly.
-              <p>
+            <?=$SERVER_NAME?> library with over <strong><?=$MOVIE_COUNT?></strong> Movies and <strong><?=$TV_COUNT?></strong> TV Shows available instantly.<p>
         </a>
       </div>
       <!--/col-lg-4 -->
 
-      <div class="col-lg-<?=strlen($PLEX_EMAIL) > 0 ? 4 : 6?>">
+      <div class="col-lg-<?=strlen($DONATE_URL) > 0 ? 4 : 6?>">
         <a href="//<?=$PLEX_REQUESTS?>" target="_top">
-          <img src="assets/img/s02.png" width="180" alt="">
-          <h4>Request</h4>
+          <img src="assets/img/request.svg" width="180" alt="">
+          <h4>Request Content</h4>
           <p>Want to watch a Movie or TV Show but it's not currently on
             <?=$SERVER_NAME?>? Request it here!</p>
         </a>
       </div>
       <!--/col-lg-4 -->
 
-      <?php if (strlen($PLEX_EMAIL) > 0) { ?>
+      <?php if (strlen($DONATE_URL) > 0) { ?>
         <div class="col-lg-4">
-          <a href="//<?=$PLEX_EMAIL?>" target="_top">
-            <img src="assets/img/s03.png" width="180" alt="">
-            <h4>What's New</h4>
-            <p>See what has been recently added to
-              <?=$SERVER_NAME?> without having to log in.</p>
+          <a href="<?=$DONATE_URL?>" target="_top">
+            <img src="assets/img/donate.svg" width="180" alt="">
+            <h4>Donate</h4>
+            <p>Say thanks and help cover the monthly costs of keeping <?=$SERVER_NAME?> running</p>
           </a>
         </div>
         <!--/col-lg-4 -->
@@ -149,8 +147,8 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
-            <h1><?=$SERVER_NAME?> Status:</h1>
-            <h4 id="server-status-msg"><img src="assets/img/puff.svg">   Checking...</h4>
+            <h1>Server Status:</h1>
+            <h4 id="server-status-msg"><img src="assets/img/puff.svg"> Checking...</h4>
           </div>
           <!-- /col-lg-6 -->
           <div class="col-lg-6">

@@ -8,13 +8,6 @@ $messages = array(
     'text' => 'Hello, world'
   )
   */
-
-
-  array(
-    'type' => 'info',
-    'date' => '7/16/2016',
-    'text' => 'Testing, 123'
-  )
 );
 
 
