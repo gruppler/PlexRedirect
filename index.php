@@ -139,7 +139,7 @@
               <input name="hosted_button_id" type="hidden" value="<?=$PAYPAL_BUTTON_ID?>" />
               <a href="#" onclick="donate_form.submit();return false">
           <?php } else { ?>
-            <a href="<?=$DONATE_URL?>" target="_blank">
+            <a href="http://dereferer.org/?<?=$DONATE_URL?>" target="_blank">
           <?php } ?>
               <img src="assets/img/donate.svg" width="180" alt="">
               <h4>Donate</h4>
