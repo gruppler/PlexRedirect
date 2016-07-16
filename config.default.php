@@ -15,6 +15,9 @@ $PLEX_REQUESTS = $SERVER_URL.':3000/search';
 // Donate URL (leave blank to hide)
 $DONATE_URL = '';
 
+// PayPal inner-most "hosted_button_id" value (leave blank to hide)
+$PAYPAL_BUTTON_ID = '';
+
 // Plex App URL
 // $PLEX_URL = 'app.plex.tv/web/app';
 $PLEX_URL = $PLEX_SERVER;

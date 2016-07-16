@@ -1,5 +1,12 @@
-<?php require('config.php'); ?>
-<?php require('messages.php'); ?>
+<?php
+  require('config.php');
+  require('messages.php');
+
+  $show_donate = strlen($DONATE_URL.$PAYPAL_BUTTON_ID) > 0;
+  if ($PAYPAL_BUTTON_ID) {
+    # code...
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,8 +115,8 @@
     <!-- /row -->
 
     <div class="row mt centered">
-      <div class="col-lg-<?=strlen($DONATE_URL) > 0 ? 4 : 6?>">
-        <a href="//<?=$PLEX_URL?>" target="_top">
+      <div class="col-lg-<?=$show_donate ? 4 : 6?>">
+        <a href="//<?=$PLEX_URL?>">
           <img src="assets/img/s01.png" width="180" alt="">
           <h4>Access <?=$SERVER_NAME?></h4>
           <p>Access over <strong><?=$MOVIE_COUNT?></strong> Movies and <strong><?=$TV_COUNT?></strong> TV Shows, all available for instant streaming!<p>
@@ -117,8 +124,8 @@
       </div>
       <!--/col-lg-4 -->
 
-      <div class="col-lg-<?=strlen($DONATE_URL) > 0 ? 4 : 6?>">
-        <a href="//<?=$PLEX_REQUESTS?>" target="_top">
+      <div class="col-lg-<?=$show_donate ? 4 : 6?>">
+        <a href="//<?=$PLEX_REQUESTS?>">
           <img src="assets/img/request.svg" width="180" alt="">
           <h4>Request Content</h4>
           <p>Want to watch a Movie or TV Show but it's not currently on
@@ -127,13 +134,21 @@
       </div>
       <!--/col-lg-4 -->
 
-      <?php if (strlen($DONATE_URL) > 0) { ?>
+      <?php if ($show_donate) { ?>
         <div class="col-lg-4">
-          <a href="<?=$DONATE_URL?>" target="_top">
-            <img src="assets/img/donate.svg" width="180" alt="">
-            <h4>Donate</h4>
-            <p>Say thanks and help cover the monthly costs of keeping <?=$SERVER_NAME?> running!</p>
-          </a>
+          <?php if (strlen($PAYPAL_BUTTON_ID) > 0) { ?>
+            <form id="donate_form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+              <input name="cmd" type="hidden" value="_s-xclick" />
+              <input name="hosted_button_id" type="hidden" value="<?=$PAYPAL_BUTTON_ID?>" />
+              <a href="#" onclick="donate_form.submit();return false">
+          <?php } else { ?>
+            <a href="<?=$DONATE_URL?>" target="_blank">
+          <?php } ?>
+              <img src="assets/img/donate.svg" width="180" alt="">
+              <h4>Donate</h4>
+              <p>Say thanks and help cover the monthly costs of keeping <?=$SERVER_NAME?> running!</p>
+            </a>
+          </form>
         </div>
         <!--/col-lg-4 -->
       <?php } ?>
