@@ -88,34 +88,34 @@
       return this;
     };
 
-    function serverUp(stream_count) {
-      serverImg.src = "assets/img/ipad-hand-on.png";
-      body.addClass('online').removeClass("offline");
-
-      if (stream_count == null) {
-        serverMsg.innerHTML = 'Ready for streaming';
-      } else {
-        serverMsg.innerHTML = 'Currently streaming to <strong>'+
-        stream_count + '</strong> user' + (stream_count == 1 ? '' : 's');
-      }
-    }
-
-    function serverDown() {
-      serverMsg.innerHTML = 'Down and unreachable';
-      serverImg.src = "assets/img/ipad-hand-off.png";
-    }
-
     function checkServer() {
       var p = new Ping();
       var server = "<?=$PLEX_SERVER?>";
       var timeout = 2000; //Milliseconds
       var body = document.getElementsByTagName("body")[0];
+      var serverMsg = document.getElementById("server-status-msg");
+      var serverImg = document.getElementById("server-status-img");
       var stream_count = <?=isset($STREAM_COUNT)?$STREAM_COUNT:'null'?>;
+
+      function serverUp() {
+        serverImg.src = "assets/img/ipad-hand-on.png";
+        body.addClass('online').removeClass("offline");
+
+        if (stream_count == null) {
+          serverMsg.innerHTML = 'Ready for streaming';
+        } else {
+          serverMsg.innerHTML = 'Currently streaming to <strong>'+
+          stream_count + '</strong> user' + (stream_count == 1 ? '' : 's');
+        }
+      }
+
+      function serverDown() {
+        serverMsg.innerHTML = 'Down and unreachable';
+        serverImg.src = "assets/img/ipad-hand-off.png";
+      }
 
       if (stream_count == null) {
         p.ping(server, function(data) {
-          var serverMsg = document.getElementById("server-status-msg");
-          var serverImg = document.getElementById("server-status-img");
           if (data < 1000) {
             serverUp(stream_count);
           } else {
