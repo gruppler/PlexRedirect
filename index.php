@@ -11,15 +11,22 @@
       if (count($libraries)) {
         $MOVIE_LIBS = explode(',', $MOVIE_LIBS);
         $TV_LIBS = explode(',', $TV_LIBS);
-        $MOVIE_COUNT = 0;
-        $TV_COUNT = 0;
+        $tmp_movie_count = 0;
+        $tmp_tv_count = 0;
 
         foreach ($libraries as $lib) {
           if (in_array($lib->section_name, $MOVIE_LIBS)) {
-            $MOVIE_COUNT += 1*$lib->count;
+            $tmp_movie_count += 1*$lib->count;
           } elseif (in_array($lib->section_name, $TV_LIBS)) {
-            $TV_COUNT += 1*$lib->count;
+            $tmp_tv_count += 1*$lib->count;
           }
+        }
+
+        if ($tmp_movie_count > 0) {
+          $MOVIE_COUNT = $tmp_movie_count;
+        }
+        if ($tmp_tv_count > 0) {
+          $TV_COUNT = $tmp_tv_count;
         }
       }
     }
